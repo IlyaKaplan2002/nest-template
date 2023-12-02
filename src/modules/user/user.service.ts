@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import dataSource from 'src/db/dataSource';
+import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/db/entity/User';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  private readonly repository = dataSource.getRepository(User);
+  constructor(
+    @InjectRepository(User)
+    private readonly repository: Repository<User>,
+  ) {}
 
   async getUserData(userId: number) {
     const user = await this.getById(userId);

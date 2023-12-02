@@ -42,16 +42,9 @@ export class AuthService {
 
   async signupEmail(email: string, password: string) {
     try {
-      const existedUser = await this.userService.getByEmail(email);
-
-      if (existedUser) {
-        throw new UnauthorizedException();
-      }
-
       const hashedPassword = await hash(password, 12);
 
       const user = await this.userService.saveUser({
-        id: existedUser?.id,
         email,
         password: hashedPassword,
       });
