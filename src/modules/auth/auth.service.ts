@@ -7,15 +7,15 @@ import {
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcrypt';
-import { getConfig } from 'src/config';
-
-const config = getConfig();
+import { EConfigKeys } from 'src/config';
+import { AppConfigService } from '../appConfig/appConfig.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly configService: AppConfigService,
   ) {}
 
   async loginEmail(email: string, password: string) {
@@ -79,11 +79,11 @@ export class AuthService {
   async getTokens(payload: { id: number; username: string | null }) {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
-        secret: config.JWT_ACCESS_SECRET,
+        secret: this.configService.get(EConfigKeys.JWT_ACCESS_SECRET),
         expiresIn: '15m',
       }),
       this.jwtService.signAsync(payload, {
-        secret: config.JWT_REFRESH_SECRET,
+        secret: this.configService.get(EConfigKeys.JWT_REFRESH_SECRET),
         expiresIn: '1d',
       }),
     ]);
