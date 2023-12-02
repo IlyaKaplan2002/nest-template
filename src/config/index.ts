@@ -62,6 +62,16 @@ export class ConfigDto {
   @IsString()
   @IsNotEmpty()
   IV!: string;
+
+  @Expose()
+  @IsString()
+  @IsNotEmpty()
+  FOREST_AUTH_SECRET!: string;
+
+  @Expose()
+  @IsString()
+  @IsNotEmpty()
+  FOREST_ENV_SECRET!: string;
 }
 
 export enum EConfigKeys {
