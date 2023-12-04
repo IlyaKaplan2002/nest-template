@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-class ConfigDto {
+export class ConfigDto {
   @Type(() => Number)
   @Expose()
   @IsInt()
@@ -62,6 +62,20 @@ class ConfigDto {
   @IsString()
   @IsNotEmpty()
   IV!: string;
+}
+
+export enum EConfigKeys {
+  APP_PORT = 'APP_PORT',
+  DB_HOST = 'DB_HOST',
+  DB_NAME = 'DB_NAME',
+  DB_PASSWORD = 'DB_PASSWORD',
+  DB_USER = 'DB_USER',
+  DB_PORT = 'DB_PORT',
+  JWT_ACCESS_SECRET = 'JWT_ACCESS_SECRET',
+  JWT_REFRESH_SECRET = 'JWT_REFRESH_SECRET',
+  APP_HOST = 'APP_HOST',
+  ENCRYPTION_KEY = 'ENCRYPTION_KEY',
+  IV = 'IV',
 }
 
 export const getConfig = (): ConfigDto => {

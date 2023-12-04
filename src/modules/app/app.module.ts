@@ -3,9 +3,10 @@ import { HealthCheckModule } from '../healthcheck/healthcheck.module';
 import { AuthModule } from '../auth/auth.module';
 import { AppLoggerMiddleware } from './app.middleware';
 import { UsersModule } from '../user/user.module';
+import { AppTypeormModule } from '../appTypeorm/appTypeorm.module';
 
 @Module({
-  imports: [HealthCheckModule, AuthModule, UsersModule],
+  imports: [AppTypeormModule, HealthCheckModule, AuthModule, UsersModule],
   controllers: [],
   providers: [],
 })
